@@ -16,4 +16,12 @@ class Product extends Model
             'line_items',
         )->withPivot('id', 'quantity');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'line_items',
+        )->withPivot('id', 'quantity');
+    }
 }

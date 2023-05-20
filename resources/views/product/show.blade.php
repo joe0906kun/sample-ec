@@ -1,33 +1,41 @@
-@extends('layouts.app')
+@extends('layouts.head')
 
 @section('title')
 {{ $product->name }}
 @endsection
 
+@section('button')
+<x-element.button>
+    ユーザー
+</x-element.button>
+@endsection
+
 @section('content')
-<div class="">
+<div class="container mx-auto px-4">
     <div class="flex justify-center flex-col items-center">
-        <img src="{{ asset($product->image) }}" class="h-72 mt-4" />
-        <div class="">
-            <div class="">
-                {{ $product->name }}
-            </div>
-            <div class="">
-                ${{ number_format($product->price) }}
-            </div>
+        <img src="{{ asset($product->image) }}" class="h-48 mt-4" />
+        <div class="text-3xl font-semibold mt-4">
+            {{ $product->name }}
         </div>
-        {{ $product->description }}
-        <form action="{{ route('line_item.create') }}" method="post">
+        <div class="text-xl font-medium mt-2">
+            ${{ number_format($product->price) }}
+        </div>
+        <div class="text-gray-700 mt-4 text-center">
+            {{ $product->description }}
+        </div>
+        <form action="{{ route('line_item.create') }}" method="post" class="mt-6">
             @csrf
             <input type="hidden" name="id" value="{{ $product->id }}" />
-            <div class="">
-                <input type="number" name="quantity" min="1" value="1" required />
+            <div class="mb-4">
+                <input type="number" name="quantity" min="1" value="1" required class="border border-gray-300 rounded w-20 text-center" />
             </div>
-            <div class="">
-                <button type="submit" class="">カートに追加する</button>
+            <div>
+                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700 transition duration-200">カートに追加する</button>
             </div>
         </form>
     </div>
-    <a href="{{ route('product.index') }}">TOPへ戻る</a>
+    <div class="mt-6">
+        <a href="{{ route('product.index') }}" class="text-blue-500 hover:text-blue-700 transition duration-200">TOPへ戻る</a>
+    </div>
 </div>
 @endsection

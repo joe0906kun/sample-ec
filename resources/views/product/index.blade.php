@@ -1,10 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.head')
 
 @section('title')
 商品一覧
 @endsection
 
+@section('button')
+<x-element.button>
+    ユーザー
+</x-element.button>
+@endsection
+
 @section('content')
+
 <div class="bg-cover h-[400px] flex items-center justify-center" style="background-image: url('/images/top.jpg');">
     <p class="text-center text-white">{{ config('app.name', 'Laravel') }}</p>
 </div>

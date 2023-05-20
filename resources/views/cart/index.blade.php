@@ -1,7 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.head')
 
 @section('title')
 カート
+@endsection
+
+@section('button')
+<x-element.button>
+    ユーザー
+</x-element.button>
 @endsection
 
 @section('content')
@@ -31,9 +37,15 @@
     <div class="text-xl font-semibold mb-4">
         小計 : ${{ number_format($total_price) }}
     </div>
-    <button onclick="location.href='{{ route('cart.checkout') }}'" class="text-white bg-blue-500 px-4 py-2 rounded hover:bg-blue-700 transition duration-200">
-        購入する
+    @guest
+    <button onclick="location.href='{{ route('login_register') }}'" class="px-4 py-1 bg-blue-500 text-white hover:bg-blue-700 transition duration-200 ease-in-out rounded">
+        ログインまたは会員登録
     </button>
+    @else
+    <button onclick="location.href='{{ route('cart.checkout') }}'" class="px-4 py-1 bg-blue-500 text-white hover:bg-blue-700 transition duration-200 ease-in-out rounded">
+        購入
+    </button>
+    @endguest
     @else
     <div class="text-lg font-semibold text-gray-600">
         カートに商品が入っていません
